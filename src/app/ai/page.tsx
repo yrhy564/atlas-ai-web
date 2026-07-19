@@ -187,7 +187,7 @@ export default function AiFinderPage() {
           </nav>
 
           <a
-            href="/#diagnosis"
+            href="/diagnosis"
             className="ml-6 rounded-xl bg-[#18B7A0] px-5 py-3 text-sm font-bold text-white hover:bg-[#109683]"
           >
             무료 AI 진단
@@ -336,7 +336,7 @@ export default function AiFinderPage() {
                     </dl>
 
                     <a
-                      href="/#diagnosis"
+                      href="/diagnosis"
                       className="mt-7 block rounded-xl bg-[#0B1831] px-5 py-4 text-center text-sm font-bold text-white hover:bg-[#18B7A0]"
                     >
                       무료 진단에 활용하기 →
@@ -390,7 +390,7 @@ export default function AiFinderPage() {
             </div>
 
             <a
-              href="/#diagnosis"
+              href="/diagnosis"
               className="rounded-xl bg-[#0B1831] px-7 py-4 text-center font-black text-white"
             >
               무료 AI 진단

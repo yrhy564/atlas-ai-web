@@ -83,7 +83,7 @@ export default function Home() {
           </nav>
 
           <a
-            href="#diagnosis"
+            href="/diagnosis"
             className="ml-6 rounded-xl bg-[#18B7A0] px-5 py-3 text-sm font-bold text-white hover:bg-[#109683]"
           >
             무료 AI 진단
@@ -167,7 +167,7 @@ export default function Home() {
                 ))}
 
                 <a
-                  href="#diagnosis"
+                  href="/diagnosis"
                   className="mt-3 block rounded-xl bg-[#0B1831] px-5 py-4 text-center font-bold text-white hover:bg-[#18B7A0]"
                 >
                   3분 무료 진단 시작하기 →
@@ -194,7 +194,7 @@ export default function Home() {
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {categories.map((category) => (
                 <a
-                  href="#diagnosis"
+                  href="/diagnosis"
                   key={category.title}
                   className="group rounded-2xl border border-slate-200 p-7 transition hover:-translate-y-1 hover:border-[#18B7A0] hover:shadow-xl"
                 >
