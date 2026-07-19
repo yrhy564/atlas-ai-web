@@ -1,3 +1,5 @@
+import { aiTools } from "@/data/ai-tools";
+
 const categories = [
   {
     icon: "📝",
@@ -31,26 +33,12 @@ const categories = [
   },
 ];
 
-const tools = [
-  {
-    initial: "C",
-    name: "ChatGPT",
-    category: "범용 AI",
-    description: "문서 작성, 아이디어 정리, 업무 지원에 활용할 수 있습니다.",
-  },
-  {
-    initial: "A",
-    name: "Claude",
-    category: "문서 분석",
-    description: "긴 문서 분석과 자연스러운 글쓰기에 활용할 수 있습니다.",
-  },
-  {
-    initial: "G",
-    name: "Gemini",
-    category: "검색·업무",
-    description: "자료 탐색과 다양한 업무 지원에 활용할 수 있습니다.",
-  },
-];
+const tools = aiTools.slice(0, 3).map((tool) => ({
+  initial: tool.initial,
+  name: tool.name,
+  tag: tool.category,
+  description: tool.summary,
+}));
 
 const guides = [
   "직장인을 위한 AI 도구 선택 기준",
@@ -239,7 +227,7 @@ export default function Home() {
                       {tool.initial}
                     </span>
                     <span className="rounded-full bg-[#E8F8F5] px-3 py-2 text-xs font-bold text-[#109683]">
-                      {tool.category}
+                      {tool.tag}
                     </span>
                   </div>
 

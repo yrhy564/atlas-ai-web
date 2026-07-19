@@ -1,129 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
-type AiTool = {
-  name: string;
-  initial: string;
-  summary: string;
-  categories: string[];
-  difficulty: "쉬움" | "보통" | "어려움";
-  pricing: string;
-  bestFor: string;
-  color: string;
-};
-
-const categories = [
-  "전체",
-  "문서·보고서",
-  "자료조사",
-  "이미지 제작",
-  "PPT 제작",
-  "코딩",
-  "업무 자동화",
-];
-
-const tools: AiTool[] = [
-  {
-    name: "ChatGPT",
-    initial: "C",
-    summary:
-      "문서 작성, 아이디어 정리, 질문 답변 등 다양한 업무에 활용하는 범용 AI",
-    categories: ["문서·보고서", "자료조사", "코딩", "업무 자동화"],
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "AI를 처음 사용하는 개인과 직장인",
-    color: "#0B1831",
-  },
-  {
-    name: "Claude",
-    initial: "A",
-    summary:
-      "긴 문서 분석과 자연스러운 글쓰기 업무에 활용할 수 있는 AI",
-    categories: ["문서·보고서", "자료조사", "코딩"],
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "문서 중심으로 일하는 사용자",
-    color: "#A85F3B",
-  },
-  {
-    name: "Gemini",
-    initial: "G",
-    summary:
-      "자료 탐색과 문서 작성 등 다양한 업무에 활용할 수 있는 AI",
-    categories: ["문서·보고서", "자료조사", "코딩"],
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "다양한 업무 도구를 사용하는 사용자",
-    color: "#2864DC",
-  },
-  {
-    name: "Perplexity",
-    initial: "P",
-    summary:
-      "질문을 기반으로 정보를 탐색하고 출처를 확인할 때 활용하는 AI",
-    categories: ["자료조사"],
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "빠른 자료조사가 필요한 사용자",
-    color: "#168C91",
-  },
-  {
-    name: "Midjourney",
-    initial: "M",
-    summary:
-      "아이디어를 이미지로 표현하고 시각 자료를 제작할 때 활용하는 AI",
-    categories: ["이미지 제작"],
-    difficulty: "보통",
-    pricing: "공식 요금 확인",
-    bestFor: "디자인과 콘텐츠 제작 사용자",
-    color: "#111827",
-  },
-  {
-    name: "Canva",
-    initial: "C",
-    summary:
-      "이미지, 카드뉴스와 프레젠테이션 디자인을 제작할 때 활용하는 도구",
-    categories: ["이미지 제작", "PPT 제작"],
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "비전문 디자인 사용자와 소상공인",
-    color: "#7C3AED",
-  },
-  {
-    name: "Gamma",
-    initial: "G",
-    summary:
-      "발표자료와 간단한 문서를 빠르게 구성할 때 활용하는 AI 도구",
-    categories: ["PPT 제작", "문서·보고서"],
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "제안서와 발표자료가 필요한 사용자",
-    color: "#7C55E7",
-  },
-  {
-    name: "GitHub Copilot",
-    initial: "G",
-    summary:
-      "코드 작성과 개발 작업을 지원하는 프로그래밍 보조 도구",
-    categories: ["코딩"],
-    difficulty: "보통",
-    pricing: "공식 요금 확인",
-    bestFor: "개발자와 코딩 학습자",
-    color: "#24292F",
-  },
-  {
-    name: "Zapier",
-    initial: "Z",
-    summary:
-      "여러 서비스를 연결해 반복 업무를 자동화할 때 활용하는 도구",
-    categories: ["업무 자동화"],
-    difficulty: "보통",
-    pricing: "공식 요금 확인",
-    bestFor: "반복 업무를 줄이고 싶은 개인과 기업",
-    color: "#FF4F00",
-  },
-];
+import { AI_CATEGORIES, aiTools } from "@/data/ai-tools";
 
 export default function AiFinderPage() {
   const [query, setQuery] = useState("");
@@ -132,7 +10,7 @@ export default function AiFinderPage() {
   const filteredTools = useMemo(() => {
     const keyword = query.trim().toLowerCase();
 
-    return tools.filter((tool) => {
+    return aiTools.filter((tool) => {
       const matchesCategory =
         selectedCategory === "전체" ||
         tool.categories.includes(selectedCategory);
@@ -238,7 +116,7 @@ export default function AiFinderPage() {
 
         <section className="border-b border-slate-200 bg-white px-6 py-7">
           <div className="mx-auto flex max-w-7xl gap-3 overflow-x-auto">
-            {categories.map((category) => {
+            {AI_CATEGORIES.map((category) => {
               const isSelected = category === selectedCategory;
 
               return (
@@ -324,23 +202,38 @@ export default function AiFinderPage() {
                         <dt className="w-16 shrink-0 font-bold text-slate-700">
                           추천
                         </dt>
-                        <dd className="text-slate-500">{tool.bestFor}</dd>
+
+                        <dd className="text-slate-500">
+                          {tool.bestFor}
+                        </dd>
                       </div>
 
                       <div className="flex gap-3">
                         <dt className="w-16 shrink-0 font-bold text-slate-700">
                           요금
                         </dt>
-                        <dd className="text-slate-500">{tool.pricing}</dd>
+
+                        <dd className="text-slate-500">
+                          {tool.pricing}
+                        </dd>
                       </div>
                     </dl>
 
-                    <a
-                      href="/diagnosis"
-                      className="mt-7 block rounded-xl bg-[#0B1831] px-5 py-4 text-center text-sm font-bold text-white hover:bg-[#18B7A0]"
-                    >
-                      무료 진단에 활용하기 →
-                    </a>
+                    <div className="mt-7 grid gap-3">
+                      <a
+                        href="/compare"
+                        className="block rounded-xl border border-slate-200 px-5 py-4 text-center text-sm font-bold text-[#0B1831] hover:bg-slate-50"
+                      >
+                        AI 비교하기
+                      </a>
+
+                      <a
+                        href="/diagnosis"
+                        className="block rounded-xl bg-[#0B1831] px-5 py-4 text-center text-sm font-bold text-white hover:bg-[#18B7A0]"
+                      >
+                        무료 진단에 활용하기 →
+                      </a>
+                    </div>
                   </article>
                 ))}
               </div>

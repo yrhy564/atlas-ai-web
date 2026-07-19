@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { aiTools } from "@/data/ai-tools";
 
 type AnswerKey = "purpose" | "experience" | "budget" | "priority";
 
@@ -17,20 +18,6 @@ type Question = {
     label: string;
     description: string;
   }[];
-};
-
-type RecommendationTool = {
-  name: string;
-  initial: string;
-  color: string;
-  category: string;
-  summary: string;
-  profiles: {
-    purpose: string[];
-    experience: string[];
-    budget: string[];
-    priority: string[];
-  };
 };
 
 const questions: Question[] = [
@@ -158,126 +145,6 @@ const questions: Question[] = [
   },
 ];
 
-const tools: RecommendationTool[] = [
-  {
-    name: "ChatGPT",
-    initial: "C",
-    color: "#0B1831",
-    category: "범용 AI",
-    summary: "문서 작성, 아이디어 정리, 질문 답변과 코딩 등 다양한 업무에 활용할 수 있습니다.",
-    profiles: {
-      purpose: ["document", "research", "coding", "automation"],
-      experience: ["beginner", "intermediate", "advanced"],
-      budget: ["free", "paid"],
-      priority: ["easy", "speed", "automation"],
-    },
-  },
-  {
-    name: "Claude",
-    initial: "A",
-    color: "#A85F3B",
-    category: "문서 분석",
-    summary: "긴 문서 분석, 내용 정리와 자연스러운 글쓰기에 활용할 수 있습니다.",
-    profiles: {
-      purpose: ["document", "research", "coding"],
-      experience: ["beginner", "intermediate", "advanced"],
-      budget: ["free", "paid"],
-      priority: ["quality", "easy"],
-    },
-  },
-  {
-    name: "Gemini",
-    initial: "G",
-    color: "#2864DC",
-    category: "검색·업무",
-    summary: "자료 탐색, 문서 작성과 다양한 업무 지원에 활용할 수 있습니다.",
-    profiles: {
-      purpose: ["document", "research", "coding"],
-      experience: ["beginner", "intermediate", "advanced"],
-      budget: ["free", "paid"],
-      priority: ["easy", "speed"],
-    },
-  },
-  {
-    name: "Perplexity",
-    initial: "P",
-    color: "#168C91",
-    category: "자료조사",
-    summary: "질문을 바탕으로 정보를 탐색하고 관련 출처를 확인할 때 활용합니다.",
-    profiles: {
-      purpose: ["research"],
-      experience: ["beginner", "intermediate", "advanced"],
-      budget: ["free", "paid"],
-      priority: ["quality", "speed", "easy"],
-    },
-  },
-  {
-    name: "Midjourney",
-    initial: "M",
-    color: "#111827",
-    category: "이미지 제작",
-    summary: "콘셉트 이미지와 다양한 스타일의 시각 자료를 제작할 때 활용합니다.",
-    profiles: {
-      purpose: ["image"],
-      experience: ["intermediate", "advanced"],
-      budget: ["paid"],
-      priority: ["quality"],
-    },
-  },
-  {
-    name: "Canva",
-    initial: "C",
-    color: "#7C3AED",
-    category: "디자인·PPT",
-    summary: "이미지, 카드뉴스와 프레젠테이션을 쉽게 디자인할 때 활용합니다.",
-    profiles: {
-      purpose: ["image", "presentation"],
-      experience: ["beginner", "intermediate"],
-      budget: ["free", "paid"],
-      priority: ["easy", "speed"],
-    },
-  },
-  {
-    name: "Gamma",
-    initial: "G",
-    color: "#7C55E7",
-    category: "PPT 제작",
-    summary: "발표자료, 제안서와 간단한 웹 문서를 빠르게 구성할 때 활용합니다.",
-    profiles: {
-      purpose: ["presentation", "document"],
-      experience: ["beginner", "intermediate"],
-      budget: ["free", "paid"],
-      priority: ["easy", "speed"],
-    },
-  },
-  {
-    name: "GitHub Copilot",
-    initial: "G",
-    color: "#24292F",
-    category: "코딩",
-    summary: "코드 작성과 개발 작업을 지원하는 프로그래밍 보조 도구입니다.",
-    profiles: {
-      purpose: ["coding"],
-      experience: ["intermediate", "advanced"],
-      budget: ["paid"],
-      priority: ["speed", "automation"],
-    },
-  },
-  {
-    name: "Zapier",
-    initial: "Z",
-    color: "#FF4F00",
-    category: "업무 자동화",
-    summary: "여러 업무 서비스를 연결해 반복 작업을 자동화할 때 활용합니다.",
-    profiles: {
-      purpose: ["automation"],
-      experience: ["intermediate", "advanced"],
-      budget: ["free", "paid"],
-      priority: ["automation", "speed"],
-    },
-  },
-];
-
 const initialAnswers: Answers = {
   purpose: "",
   experience: "",
@@ -301,7 +168,7 @@ export default function DiagnosisPage() {
   const currentAnswer = answers[currentQuestion.id];
 
   const recommendations = useMemo(() => {
-    return tools
+    return aiTools
       .map((tool) => {
         let score = 0;
         const reasons: string[] = [];
@@ -440,6 +307,7 @@ export default function DiagnosisPage() {
                     ? "진단 완료"
                     : `${step + 1} / ${questions.length} 단계`}
                 </span>
+
                 <span>{Math.round(progress)}%</span>
               </div>
 
@@ -554,7 +422,10 @@ export default function DiagnosisPage() {
                         key={question.id}
                         className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold text-slate-300"
                       >
-                        {getAnswerLabel(question.id, answers[question.id])}
+                        {getAnswerLabel(
+                          question.id,
+                          answers[question.id],
+                        )}
                       </span>
                     ))}
                   </div>
@@ -603,7 +474,9 @@ export default function DiagnosisPage() {
                                 key={reason}
                                 className="flex gap-2 text-sm leading-6 text-slate-500"
                               >
-                                <span className="text-[#18B7A0]">✓</span>
+                                <span className="text-[#18B7A0]">
+                                  ✓
+                                </span>
                                 <span>{reason}</span>
                               </li>
                             ))

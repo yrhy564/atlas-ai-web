@@ -1,19 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-type CompareTool = {
-  name: string;
-  initial: string;
-  color: string;
-  category: string;
-  purpose: string;
-  difficulty: string;
-  pricing: string;
-  bestFor: string;
-  strengths: string[];
-  cautions: string[];
-};
+import { aiTools, type AiTool } from "@/data/ai-tools";
 
 type ComparableKey =
   | "purpose"
@@ -22,171 +10,6 @@ type ComparableKey =
   | "bestFor"
   | "strengths"
   | "cautions";
-
-const tools: CompareTool[] = [
-  {
-    name: "ChatGPT",
-    initial: "C",
-    color: "#0B1831",
-    category: "범용 AI",
-    purpose: "문서 초안, 아이디어 정리, 질문 답변, 코딩 지원",
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "AI를 처음 사용하는 개인과 직장인",
-    strengths: [
-      "다양한 업무에 폭넓게 활용 가능",
-      "초보자가 시작하기 쉬움",
-    ],
-    cautions: [
-      "중요한 정보는 별도로 사실 확인 필요",
-      "민감한 개인정보 입력 주의",
-    ],
-  },
-  {
-    name: "Claude",
-    initial: "A",
-    color: "#A85F3B",
-    category: "문서 분석",
-    purpose: "긴 문서 분석, 글쓰기, 내용 요약, 코딩 지원",
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "긴 문서와 글을 자주 다루는 사용자",
-    strengths: [
-      "긴 문서 중심의 작업에 활용 가능",
-      "자연스러운 문장 구성에 활용",
-    ],
-    cautions: [
-      "결과물의 정확성을 직접 검토해야 함",
-      "서비스별 사용 한도 확인 필요",
-    ],
-  },
-  {
-    name: "Gemini",
-    initial: "G",
-    color: "#2864DC",
-    category: "검색·업무",
-    purpose: "자료 탐색, 문서 작성, 아이디어 정리, 코딩 지원",
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "다양한 업무 도구를 사용하는 사용자",
-    strengths: [
-      "다양한 업무에 활용 가능",
-      "자료 탐색과 문서 작성 지원",
-    ],
-    cautions: [
-      "출처와 답변의 정확성 검토 필요",
-      "기능과 제공 범위가 변경될 수 있음",
-    ],
-  },
-  {
-    name: "Perplexity",
-    initial: "P",
-    color: "#168C91",
-    category: "자료조사",
-    purpose: "질문 기반 검색, 자료조사, 출처 확인",
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "빠르게 자료를 조사하고 싶은 사용자",
-    strengths: [
-      "정보 탐색 과정에 활용하기 쉬움",
-      "자료 출처 확인에 도움",
-    ],
-    cautions: [
-      "표시된 출처 내용을 직접 확인해야 함",
-      "전문적인 판단을 완전히 대신할 수 없음",
-    ],
-  },
-  {
-    name: "Midjourney",
-    initial: "M",
-    color: "#111827",
-    category: "이미지 제작",
-    purpose: "이미지 생성, 콘셉트 제작, 시각적 아이디어 표현",
-    difficulty: "보통",
-    pricing: "공식 요금 확인",
-    bestFor: "디자인과 콘텐츠를 제작하는 사용자",
-    strengths: [
-      "다양한 스타일의 이미지 제작 가능",
-      "콘셉트 시각화에 활용",
-    ],
-    cautions: [
-      "원하는 결과를 위한 설명 작성 연습 필요",
-      "상업적 사용 조건 확인 필요",
-    ],
-  },
-  {
-    name: "Canva",
-    initial: "C",
-    color: "#7C3AED",
-    category: "디자인·PPT",
-    purpose: "이미지, 카드뉴스, 프레젠테이션 디자인",
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "디자인 비전문가, 소상공인과 콘텐츠 제작자",
-    strengths: [
-      "템플릿을 활용해 쉽게 시작 가능",
-      "다양한 디자인 작업을 한곳에서 진행",
-    ],
-    cautions: [
-      "일부 기능은 요금제 확인 필요",
-      "사용하는 자료의 라이선스 확인 필요",
-    ],
-  },
-  {
-    name: "Gamma",
-    initial: "G",
-    color: "#7C55E7",
-    category: "PPT 제작",
-    purpose: "발표자료, 제안서와 간단한 웹 문서 구성",
-    difficulty: "쉬움",
-    pricing: "공식 요금 확인",
-    bestFor: "발표자료를 빠르게 구성하려는 사용자",
-    strengths: [
-      "자료 구조와 초안을 빠르게 구성",
-      "디자인 경험이 적어도 시작 가능",
-    ],
-    cautions: [
-      "최종 내용과 디자인 검토 필요",
-      "세부 편집 범위 확인 필요",
-    ],
-  },
-  {
-    name: "GitHub Copilot",
-    initial: "G",
-    color: "#24292F",
-    category: "코딩",
-    purpose: "코드 작성, 개발 보조와 프로그래밍 학습",
-    difficulty: "보통",
-    pricing: "공식 요금 확인",
-    bestFor: "개발자와 코딩 학습자",
-    strengths: [
-      "코드 작성 과정의 생산성 향상 지원",
-      "개발 환경에서 활용 가능",
-    ],
-    cautions: [
-      "생성된 코드는 반드시 검토하고 테스트해야 함",
-      "보안과 라이선스 확인 필요",
-    ],
-  },
-  {
-    name: "Zapier",
-    initial: "Z",
-    color: "#FF4F00",
-    category: "업무 자동화",
-    purpose: "여러 서비스 연결과 반복 업무 자동화",
-    difficulty: "보통",
-    pricing: "공식 요금 확인",
-    bestFor: "반복 업무를 줄이려는 개인과 기업",
-    strengths: [
-      "다양한 업무 도구 연결에 활용",
-      "코딩 없이 자동화를 시작할 수 있음",
-    ],
-    cautions: [
-      "자동화 실행 전 충분한 테스트 필요",
-      "서비스 연결 조건과 요금 확인 필요",
-    ],
-  },
-];
 
 const comparisonFields: {
   label: string;
@@ -228,8 +51,8 @@ export default function ComparePage() {
   const [notice, setNotice] = useState("");
 
   const selectedTools = selectedNames
-    .map((name) => tools.find((tool) => tool.name === name))
-    .filter((tool): tool is CompareTool => Boolean(tool));
+    .map((name) => aiTools.find((tool) => tool.name === name))
+    .filter((tool): tool is AiTool => Boolean(tool));
 
   const toggleTool = (toolName: string) => {
     const isSelected = selectedNames.includes(toolName);
@@ -341,7 +164,7 @@ export default function ComparePage() {
             </div>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {tools.map((tool) => {
+              {aiTools.map((tool) => {
                 const isSelected = selectedNames.includes(tool.name);
 
                 return (
@@ -367,6 +190,7 @@ export default function ComparePage() {
                       <strong className="block text-[#0B1831]">
                         {tool.name}
                       </strong>
+
                       <span className="mt-1 block text-xs text-slate-500">
                         {tool.category}
                       </span>
@@ -460,7 +284,7 @@ export default function ComparePage() {
                   <tbody>
                     {comparisonFields.map((field) => (
                       <tr key={field.key}>
-                        <th className="border-b border-r border-slate-200 bg-slate-50 p-6 text-left align-top text-sm font-black text-[#0B1831] last:border-b-0">
+                        <th className="border-b border-r border-slate-200 bg-slate-50 p-6 text-left align-top text-sm font-black text-[#0B1831]">
                           {field.label}
                         </th>
 
@@ -476,7 +300,9 @@ export default function ComparePage() {
                                 <ul className="space-y-2">
                                   {value.map((item) => (
                                     <li key={item} className="flex gap-2">
-                                      <span className="text-[#18B7A0]">•</span>
+                                      <span className="text-[#18B7A0]">
+                                        •
+                                      </span>
                                       <span>{item}</span>
                                     </li>
                                   ))}
@@ -517,7 +343,9 @@ export default function ComparePage() {
         <section className="bg-[#18B7A0] px-6 py-16 text-white">
           <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 md:flex-row md:items-center">
             <div>
-              <p className="font-bold">비교해도 선택하기 어렵나요?</p>
+              <p className="font-bold">
+                비교해도 선택하기 어렵나요?
+              </p>
 
               <h2 className="mt-3 text-3xl font-black">
                 무료 AI 진단으로 추천받아 보세요
