@@ -173,7 +173,7 @@ export default function AiFinderPage() {
               AI 찾기
             </a>
 
-            <a href="/#compare" className="hover:text-[#18B7A0]">
+            <a href="/compare" className="hover:text-[#18B7A0]">
               AI 비교
             </a>
 

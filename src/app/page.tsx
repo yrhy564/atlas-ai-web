@@ -71,7 +71,7 @@ export default function Home() {
             <a href="/ai" className="hover:text-[#18B7A0]">
               AI 찾기
             </a>
-            <a href="#compare" className="hover:text-[#18B7A0]">
+            <a href="/compare" className="hover:text-[#18B7A0]">
               AI 비교
             </a>
             <a href="#guides" className="hover:text-[#18B7A0]">
@@ -251,12 +251,12 @@ export default function Home() {
                     {tool.description}
                   </p>
 
-                  <button
-                    type="button"
-                    className="mt-5 w-full rounded-xl border border-slate-200 px-4 py-3 font-bold text-[#0B1831] hover:bg-[#0B1831] hover:text-white"
+                  <a
+                    href="/compare"
+                    className="mt-5 block w-full rounded-xl border border-slate-200 px-4 py-3 text-center font-bold text-[#0B1831] hover:bg-[#0B1831] hover:text-white"
                   >
-                    비교 목록에 담기
-                  </button>
+                    AI 비교하기
+                  </a>
                 </article>
               ))}
             </div>
