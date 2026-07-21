@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -24,8 +25,15 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex h-20 max-w-7xl items-center px-6">
-        <Link href="/" className="text-2xl font-black tracking-tight text-[#0B1831]">
-          ATLAS <span className="text-[#18B7A0]">AI</span>
+        <Link href="/" className="relative block h-11 w-32 shrink-0 overflow-hidden focus-visible:outline-none sm:h-12 sm:w-48" aria-label="ATLAS AI 홈">
+          <Image
+            src="/atlas-ai-logo-transparent.png"
+            alt="ATLAS AI"
+            fill
+            sizes="192px"
+            className="scale-[1.08] object-cover object-center"
+            loading="eager"
+          />
         </Link>
 
         <nav className="ml-auto hidden items-center gap-8 text-sm font-bold lg:flex" aria-label="주요 메뉴">
