@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { aiTools } from "@/data/ai-tools";
 
 const categories = [
@@ -49,35 +52,7 @@ const guides = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex h-20 max-w-7xl items-center px-6">
-          <a href="#top" className="text-2xl font-black tracking-tight text-[#0B1831]">
-            ATLAS <span className="text-[#18B7A0]">AI</span>
-          </a>
-
-          <nav className="ml-auto hidden items-center gap-8 text-sm font-bold text-slate-600 lg:flex">
-            <a href="/ai" className="hover:text-[#18B7A0]">
-              AI 찾기
-            </a>
-            <a href="/compare" className="hover:text-[#18B7A0]">
-              AI 비교
-            </a>
-            <a href="#guides" className="hover:text-[#18B7A0]">
-              활용 가이드
-            </a>
-            <a href="#contact" className="hover:text-[#18B7A0]">
-              기업 문의
-            </a>
-          </nav>
-
-          <a
-            href="/diagnosis"
-            className="ml-6 rounded-xl bg-[#18B7A0] px-5 py-3 text-sm font-bold text-white hover:bg-[#109683]"
-          >
-            무료 AI 진단
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main id="top">
         <section className="overflow-hidden bg-[#0B1831] text-white">
@@ -103,12 +78,12 @@ export default function Home() {
                 <span className="flex-1 px-2 text-sm text-slate-500">
                   어떤 일을 AI로 해결하고 싶으신가요?
                 </span>
-                <a
+                <Link
                   href="/ai"
                   className="rounded-xl bg-[#18B7A0] px-6 py-4 text-center text-sm font-bold text-white"
                 >
                   AI 찾기
-                </a>
+                </Link>
               </div>
 
               <div className="mt-6 flex flex-wrap gap-5 text-sm font-semibold text-slate-400">
@@ -119,7 +94,7 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="absolute -inset-8 rounded-full bg-[#18B7A0]/20 blur-3xl" />
+              <div className="pointer-events-none absolute -inset-8 rounded-full bg-[#18B7A0]/20 blur-3xl" />
 
               <div className="relative rounded-3xl border border-white/20 bg-white p-8 text-slate-900 shadow-2xl">
                 <p className="flex items-center gap-2 text-sm font-black text-[#109683]">
@@ -154,12 +129,12 @@ export default function Home() {
                   </div>
                 ))}
 
-                <a
+                <Link
                   href="/diagnosis"
                   className="mt-3 block rounded-xl bg-[#0B1831] px-5 py-4 text-center font-bold text-white hover:bg-[#18B7A0]"
                 >
                   3분 무료 진단 시작하기 →
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -181,8 +156,8 @@ export default function Home() {
 
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {categories.map((category) => (
-                <a
-                  href="/diagnosis"
+                <Link
+                  href={`/ai?category=${encodeURIComponent(category.title)}`}
                   key={category.title}
                   className="group rounded-2xl border border-slate-200 p-7 transition hover:-translate-y-1 hover:border-[#18B7A0] hover:shadow-xl"
                 >
@@ -196,7 +171,7 @@ export default function Home() {
                   <p className="mt-6 text-sm font-bold text-[#109683]">
                     AI 찾아보기 →
                   </p>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -239,12 +214,12 @@ export default function Home() {
                     {tool.description}
                   </p>
 
-                  <a
+                  <Link
                     href="/compare"
                     className="mt-5 block w-full rounded-xl border border-slate-200 px-4 py-3 text-center font-bold text-[#0B1831] hover:bg-[#0B1831] hover:text-white"
                   >
                     AI 비교하기
-                  </a>
+                  </Link>
                 </article>
               ))}
             </div>
@@ -266,12 +241,12 @@ export default function Home() {
                 사용 목적, 직업, 예산과 AI 경험을 바탕으로 가장 적합한
                 도구를 추천합니다.
               </p>
-              <a
-                href="#contact"
+              <Link
+                href="/diagnosis"
                 className="mt-8 inline-flex rounded-xl bg-[#18B7A0] px-6 py-4 font-bold text-white"
               >
                 무료 진단 시작하기
-              </a>
+              </Link>
             </div>
 
             <div className="space-y-4">
@@ -310,8 +285,8 @@ export default function Home() {
 
             <div className="mt-10 grid gap-5 md:grid-cols-3">
               {guides.map((guide, index) => (
-                <a
-                  href="#contact"
+                <Link
+                  href="/guides"
                   key={guide}
                   className="rounded-2xl bg-slate-50 p-7 hover:shadow-lg"
                 >
@@ -324,7 +299,7 @@ export default function Home() {
                   <p className="mt-6 text-sm font-bold text-slate-500">
                     활용 가이드 읽기 →
                   </p>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -355,19 +330,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="bg-[#071326] px-6 py-12 text-slate-400">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
-          <div>
-            <p className="text-xl font-black text-white">
-              ATLAS <span className="text-[#18B7A0]">AI</span>
-            </p>
-            <p className="mt-3 text-sm">
-              사람들이 원하는 결과를 AI로 달성하도록 돕습니다.
-            </p>
-          </div>
-          <p className="text-sm">© 2026 ATLAS AI. All rights reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

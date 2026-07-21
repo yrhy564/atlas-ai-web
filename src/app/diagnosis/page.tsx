@@ -1,6 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { aiTools } from "@/data/ai-tools";
 
 type AnswerKey = "purpose" | "experience" | "budget" | "priority";
@@ -245,45 +248,7 @@ export default function DiagnosisPage() {
 
   return (
     <div className="min-h-screen bg-[#F6F8FB] text-slate-900">
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex h-20 max-w-7xl items-center px-6">
-          <a
-            href="/"
-            className="text-2xl font-black tracking-tight text-[#0B1831]"
-          >
-            ATLAS <span className="text-[#18B7A0]">AI</span>
-          </a>
-
-          <nav className="ml-auto hidden items-center gap-8 text-sm font-bold text-slate-600 lg:flex">
-            <a href="/" className="hover:text-[#18B7A0]">
-              홈
-            </a>
-
-            <a href="/ai" className="hover:text-[#18B7A0]">
-              AI 찾기
-            </a>
-
-            <a href="/compare" className="hover:text-[#18B7A0]">
-              AI 비교
-            </a>
-
-            <a href="/#guides" className="hover:text-[#18B7A0]">
-              활용 가이드
-            </a>
-
-            <a href="/#contact" className="hover:text-[#18B7A0]">
-              기업 문의
-            </a>
-          </nav>
-
-          <a
-            href="/diagnosis"
-            className="ml-6 rounded-xl bg-[#18B7A0] px-5 py-3 text-sm font-bold text-white"
-          >
-            무료 AI 진단
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main>
         <section className="bg-[#0B1831] px-6 py-16 text-white">
@@ -488,12 +453,12 @@ export default function DiagnosisPage() {
                         </ul>
                       </div>
 
-                      <a
+                      <Link
                         href="/compare"
                         className="mt-7 block rounded-xl bg-[#0B1831] px-5 py-4 text-center text-sm font-bold text-white hover:bg-[#18B7A0]"
                       >
                         비교 페이지에서 확인 →
-                      </a>
+                      </Link>
                     </article>
                   ))}
                 </div>
@@ -507,12 +472,12 @@ export default function DiagnosisPage() {
                     진단 다시 하기
                   </button>
 
-                  <a
+                  <Link
                     href="/ai"
                     className="rounded-xl bg-[#18B7A0] px-6 py-4 text-center font-bold text-white"
                   >
                     전체 AI 목록 보기
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-900">
@@ -526,23 +491,7 @@ export default function DiagnosisPage() {
         </section>
       </main>
 
-      <footer className="bg-[#071326] px-6 py-10 text-slate-400">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 md:flex-row">
-          <div>
-            <p className="text-xl font-black text-white">
-              ATLAS <span className="text-[#18B7A0]">AI</span>
-            </p>
-
-            <p className="mt-2 text-sm">
-              사람들이 원하는 결과를 AI로 달성하도록 돕습니다.
-            </p>
-          </div>
-
-          <p className="text-sm">
-            © 2026 ATLAS AI. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

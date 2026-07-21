@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { aiTools, type AiTool } from "@/data/ai-tools";
 
 type ComparableKey =
@@ -76,45 +79,7 @@ export default function ComparePage() {
 
   return (
     <div className="min-h-screen bg-[#F6F8FB] text-slate-900">
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex h-20 max-w-7xl items-center px-6">
-          <a
-            href="/"
-            className="text-2xl font-black tracking-tight text-[#0B1831]"
-          >
-            ATLAS <span className="text-[#18B7A0]">AI</span>
-          </a>
-
-          <nav className="ml-auto hidden items-center gap-8 text-sm font-bold text-slate-600 lg:flex">
-            <a href="/" className="hover:text-[#18B7A0]">
-              홈
-            </a>
-
-            <a href="/ai" className="hover:text-[#18B7A0]">
-              AI 찾기
-            </a>
-
-            <a href="/compare" className="text-[#18B7A0]">
-              AI 비교
-            </a>
-
-            <a href="/#guides" className="hover:text-[#18B7A0]">
-              활용 가이드
-            </a>
-
-            <a href="/#contact" className="hover:text-[#18B7A0]">
-              기업 문의
-            </a>
-          </nav>
-
-          <a
-            href="/diagnosis"
-            className="ml-6 rounded-xl bg-[#18B7A0] px-5 py-3 text-sm font-bold text-white hover:bg-[#109683]"
-          >
-            무료 AI 진단
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main>
         <section className="bg-[#0B1831] px-6 py-20 text-white">
@@ -352,33 +317,17 @@ export default function ComparePage() {
               </h2>
             </div>
 
-            <a
+            <Link
               href="/diagnosis"
               className="rounded-xl bg-[#0B1831] px-7 py-4 text-center font-black text-white"
             >
               무료 AI 진단
-            </a>
+            </Link>
           </div>
         </section>
       </main>
 
-      <footer className="bg-[#071326] px-6 py-10 text-slate-400">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 md:flex-row">
-          <div>
-            <p className="text-xl font-black text-white">
-              ATLAS <span className="text-[#18B7A0]">AI</span>
-            </p>
-
-            <p className="mt-2 text-sm">
-              사람들이 원하는 결과를 AI로 달성하도록 돕습니다.
-            </p>
-          </div>
-
-          <p className="text-sm">
-            © 2026 ATLAS AI. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
