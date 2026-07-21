@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { AI_CATEGORIES, aiTools } from "@/data/ai-tools";
+import { AI_CATEGORIES, aiTools, getAiToolSlug } from "@/data/ai-tools";
 
 export default function AiFinderPage() {
   const [query, setQuery] = useState("");
@@ -194,18 +194,18 @@ export default function AiFinderPage() {
 
                     <div className="mt-7 grid gap-3">
                       <Link
+                        href={`/ai/${getAiToolSlug(tool.name)}`}
+                        className="block rounded-xl bg-[#18B7A0] px-5 py-4 text-center text-sm font-bold text-white hover:bg-[#109683]"
+                      >
+                        상세 정보 보기 →
+                      </Link>
+                      <Link
                         href="/compare"
                         className="block rounded-xl border border-slate-200 px-5 py-4 text-center text-sm font-bold text-[#0B1831] hover:bg-slate-50"
                       >
                         AI 비교하기
                       </Link>
 
-                      <Link
-                        href="/diagnosis"
-                        className="block rounded-xl bg-[#0B1831] px-5 py-4 text-center text-sm font-bold text-white hover:bg-[#18B7A0]"
-                      >
-                        무료 진단에 활용하기 →
-                      </Link>
                     </div>
                   </article>
                 ))}

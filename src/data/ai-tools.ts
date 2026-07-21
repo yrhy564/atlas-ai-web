@@ -284,3 +284,7 @@ export const aiTools: AiTool[] = [
     },
   },
 ];
+
+export function getAiToolSlug(name: string) {
+  return name.toLowerCase().replaceAll(" ", "-");
+}

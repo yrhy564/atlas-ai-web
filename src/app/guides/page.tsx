@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-
-const guides = [
-  { title: "직장인을 위한 AI 도구 선택 기준", summary: "목적, 사용 난이도, 비용과 결과 검증 방법을 기준으로 도구를 고르는 순서를 안내합니다." },
-  { title: "무료 AI와 유료 AI의 차이", summary: "무료로 먼저 검증할 항목과 유료 전환 전에 확인해야 할 사용량·보안 조건을 정리합니다." },
-  { title: "AI로 보고서 초안 만드는 방법", summary: "자료 정리부터 목차, 초안, 사실 확인까지 안전하게 보고서를 만드는 기본 흐름을 소개합니다." },
-];
+import { guides } from "@/data/guides";
 
 export default function GuidesPage() {
   return (
@@ -23,12 +18,12 @@ export default function GuidesPage() {
         <section className="px-6 py-16">
           <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
             {guides.map((guide, index) => (
-              <article key={guide.title} className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-                <span className="text-xs font-black text-[#109683]">GUIDE {String(index + 1).padStart(2, "0")}</span>
+              <Link href={`/guides/${guide.slug}`} key={guide.title} className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                <span className="text-xs font-black text-[#109683]">GUIDE {String(index + 1).padStart(2, "0")} · {guide.category}</span>
                 <h2 className="mt-5 text-xl font-black leading-8 text-[#0B1831]">{guide.title}</h2>
                 <p className="mt-4 text-sm leading-7 text-slate-500">{guide.summary}</p>
-                <p className="mt-6 rounded-xl bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900">상세 가이드 준비 중</p>
-              </article>
+                <p className="mt-6 text-sm font-bold text-[#109683]">가이드 읽기 →</p>
+              </Link>
             ))}
           </div>
           <div className="mx-auto mt-12 max-w-7xl rounded-3xl bg-[#18B7A0] p-8 text-white sm:flex sm:items-center sm:justify-between">

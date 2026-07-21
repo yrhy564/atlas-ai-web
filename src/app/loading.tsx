@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="grid min-h-[60vh] place-items-center bg-[#F7FAFC]" role="status"><div className="text-center"><span className="mx-auto block h-12 w-12 animate-spin rounded-full border-4 border-slate-200 border-t-[#18B7A0]"/><p className="mt-5 text-sm font-bold text-slate-500">페이지를 불러오고 있습니다</p></div></div>}

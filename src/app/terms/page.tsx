@@ -1,0 +1,2 @@
+import { LegalPage } from "@/components/legal-page";
+export default function TermsPage(){return <LegalPage title="이용약관" description="ATLAS AI 서비스 이용 조건을 안내하는 초안 페이지입니다." sections={[{title:"서비스의 목적",body:"ATLAS AI는 AI 도구 정보, 비교, 진단과 활용 가이드를 제공하는 플랫폼을 지향합니다."},{title:"정보 이용 시 주의사항",body:"제공되는 정보와 추천은 사용자의 최종 판단을 대신하지 않습니다. 중요한 결정 전에는 공식 정보와 전문가 의견을 확인해야 합니다."},{title:"서비스 변경",body:"초안 개발 과정에서 기능과 콘텐츠는 변경될 수 있으며 실제 운영 전 세부 이용 조건을 확정합니다."}]}/>}

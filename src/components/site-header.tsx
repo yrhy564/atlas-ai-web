@@ -10,7 +10,7 @@ const navigation = [
   { href: "/ai", label: "AI 찾기" },
   { href: "/compare", label: "AI 비교" },
   { href: "/guides", label: "활용 가이드" },
-  { href: "/#contact", label: "기업 문의" },
+  { href: "/contact", label: "기업 문의" },
 ];
 
 export function SiteHeader() {

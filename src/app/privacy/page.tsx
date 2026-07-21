@@ -1,0 +1,2 @@
+import { LegalPage } from "@/components/legal-page";
+export default function PrivacyPage(){return <LegalPage title="개인정보처리방침" description="ATLAS AI의 개인정보 처리 기준을 안내하는 초안 페이지입니다." sections={[{title:"수집하는 정보",body:"현재 초안 홈페이지는 개인정보를 서버에 저장하지 않습니다. 향후 문의 및 회원 기능 도입 시 수집 항목과 목적을 명확히 고지합니다."},{title:"정보의 이용 목적",body:"문의 응대, 서비스 개선과 사용자가 요청한 기능 제공 범위에서만 정보를 이용하는 것을 원칙으로 합니다."},{title:"보관과 삭제",body:"실제 서비스 운영 전 보관 기간, 삭제 절차와 이용자 권리 행사 방법을 구체적으로 정합니다."}]}/>}
